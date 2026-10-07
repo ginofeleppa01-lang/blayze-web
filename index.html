@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Blayze · Der Wecker ohne Schlummertaste</title>
+<meta name="description" content="Blayze ist ein iPhone-Wecker ohne Schlummertaste. Er klingelt weiter, bis du eine Mission gelöst hast. Jetzt im App Store.">
+<link rel="canonical" href="https://blayzeapp.de/">
+<meta property="og:title" content="Blayze · Der Wecker ohne Schlummertaste">
+<meta property="og:description" content="Er klingelt weiter, bis du eine Mission gelöst hast. Jetzt im App Store.">
+<meta property="og:image" content="https://blayzeapp.de/og.jpg">
+<meta property="og:url" content="https://blayzeapp.de/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0C0A09">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --ground:#0C0A09;
+  --surface:#161211;
+  --surface-hi:#1F1917;
+  --border:#2E2622;
+  --ink:#F4F0EA;
+  --ink-mid:#9C938A;
+  --ink-low:#635A53;
+  --signal:#FF8A00;
+  --signal-deep:#E06E00;
+  --signal-lite:#FFB454;
+  --edge:rgba(255,235,214,0.07);
+
+  --t-display:clamp(40px,7.6vw,74px);
+  --t-title:clamp(24px,3.6vw,34px);
+  --t-body:clamp(16px,1.7vw,18px);
+
+  --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:48px; --s6:64px; --s7:96px;
+  --sans:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --mono:'IBM Plex Mono','SFMono-Regular',Menlo,Consolas,monospace;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:var(--t-body);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-0.025em;line-height:1.04}
+p{margin:0}
+
+.wrap{width:min(1120px,100% - 2*var(--s3));margin-inline:auto}
+
+/* ---------------------------------------------------------------- */
+/* Kopfzeile: Zeichen, ein Link, ein Knopf. Mehr braucht es nicht.   */
+/* ---------------------------------------------------------------- */
+.hd{
+  position:sticky;top:0;z-index:20;
+  background:rgba(12,10,9,.82);
+  backdrop-filter:saturate(140%) blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);min-height:66px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;letter-spacing:.26em;font-size:14px}
+.logo svg{flex:none}
+.hd nav{display:flex;gap:var(--s3);font-size:15px}
+.hd nav a{color:var(--ink-mid);text-decoration:none}
+.hd nav a:hover{color:var(--ink)}
+@media (max-width:720px){.hd nav{display:none}}
+
+/* ---------------------------------------------------------------- */
+/* Der Store-Knopf. Ein Ziel auf der ganzen Seite.                   */
+/* ---------------------------------------------------------------- */
+.store{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 20px;border-radius:999px;
+  background:linear-gradient(180deg,var(--signal-lite),var(--signal-deep));
+  color:#1a0f00;text-decoration:none;
+  font-weight:800;font-size:15px;letter-spacing:-0.01em;
+  border-top:1px solid rgba(255,255,255,.35);
+  box-shadow:0 2px 10px rgba(0,0,0,.5), 0 14px 40px rgba(255,138,0,.20);
+  white-space:nowrap;
+}
+.store:hover{filter:brightness(1.06)}
+.store.lg{padding:17px 30px;font-size:17px}
+.store small{display:block;font-weight:500;font-size:11px;opacity:.72;letter-spacing:.02em;line-height:1.2}
+.store b{display:block;font-size:16px;line-height:1.15}
+.store.lg b{font-size:19px}
+
+/* ---------------------------------------------------------------- */
+/* Hero                                                              */
+/* ---------------------------------------------------------------- */
+.hero{position:relative;overflow:hidden;padding:clamp(56px,8vw,104px) 0 clamp(40px,6vw,72px)}
+.hero::before{
+  content:"";position:absolute;left:50%;top:-28%;translate:-50% 0;
+  width:min(1000px,140%);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,138,0,.20),rgba(255,138,0,0) 62%);
+  pointer-events:none;
+}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;text-align:center;justify-items:center}}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--signal);
+  border:1px solid rgba(255,138,0,.30);border-radius:999px;
+  padding:7px 14px;margin-bottom:var(--s3);
+}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--signal);display:block}
+
+h1{font-size:var(--t-display);font-weight:800;margin-bottom:var(--s3)}
+.lede{color:var(--ink-mid);max-width:44ch;margin-bottom:var(--s4);font-size:clamp(17px,1.9vw,20px)}
+@media (max-width:900px){.lede{margin-inline:auto}}
+.hero-cta{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+@media (max-width:900px){.hero-cta{align-items:center}}
+.unter{font-family:var(--mono);font-size:12.5px;color:var(--ink-low);letter-spacing:.01em}
+
+/* Zwei Geraete, das hintere angeschnitten und gekippt */
+.shots{position:relative;display:flex;justify-content:center;align-items:flex-start;gap:0;padding-block:var(--s2)}
+.shots img{
+  width:min(250px,44vw);border-radius:30px;
+  box-shadow:0 30px 70px rgba(0,0,0,.65), 0 0 0 1px var(--edge);
+}
+.shots img:first-child{rotate:-5deg;translate:14px 0;z-index:2}
+.shots img:last-child{rotate:5deg;translate:-14px 18px;opacity:.94}
+
+/* ---------------------------------------------------------------- */
+/* Drei Karten. Das ist der ganze Funktionsteil.                     */
+/* ---------------------------------------------------------------- */
+.sec{padding:clamp(48px,7vw,92px) 0}
+.sec h2{font-size:var(--t-title);font-weight:800;margin-bottom:var(--s2)}
+.sec .intro{color:var(--ink-mid);max-width:52ch;margin-bottom:var(--s5)}
+
+.karten{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3)}
+@media (max-width:860px){.karten{grid-template-columns:1fr}}
+.karte{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-top:1px solid var(--edge);
+  border-radius:20px;padding:var(--s4);
+  display:flex;flex-direction:column;gap:10px;
+}
+.karte .num{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--signal)}
+.karte h3{font-size:21px;font-weight:700}
+.karte p{color:var(--ink-mid);font-size:16px}
+
+/* ---------------------------------------------------------------- */
+/* Preis und Abschluss                                               */
+/* ---------------------------------------------------------------- */
+.schluss{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-top:1px solid var(--edge);
+  border-radius:26px;
+  padding:clamp(32px,5vw,60px);
+  display:grid;grid-template-columns:1.2fr .8fr;gap:var(--s5);align-items:center;
+}
+@media (max-width:860px){.schluss{grid-template-columns:1fr;text-align:center;justify-items:center}}
+.schluss h2{margin-bottom:var(--s2)}
+.preis{font-family:var(--mono);color:var(--ink-mid);font-size:15px;line-height:1.9}
+.preis b{color:var(--ink);font-weight:500}
+
+footer{border-top:1px solid var(--border);padding:var(--s5) 0 var(--s6);margin-top:var(--s5)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:var(--s3);justify-content:space-between;align-items:center}
+footer nav{display:flex;flex-wrap:wrap;gap:var(--s3)}
+footer a{color:var(--ink-mid);text-decoration:none;font-size:15px}
+footer a:hover{color:var(--ink)}
+.copy{font-family:var(--mono);font-size:12px;color:var(--ink-low)}
+
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+
+<body>
+
+<header class="hd">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Blayze, zum Seitenanfang">
+      <svg width="26" height="20" viewBox="0 2 32 24" fill="none" aria-hidden="true">
+        <path d="M3 24H29" stroke="#FF8A00" stroke-width="3.4" stroke-linecap="round"/>
+        <path d="M7 24A9 9 0 0 1 25 24" fill="#FF8A00"/>
+        <path d="M16 4V8M27 9L24.5 11.5M5 9L7.5 11.5" stroke="#FF8A00" stroke-width="3.2" stroke-linecap="round"/>
+      </svg>
+      BLAYZE
+    </a>
+    <nav>
+      <a href="#so">So funktioniert es</a>
+      <a href="#preis">Preis</a>
+      <a href="/support">Kontakt</a>
+    </nav>
+    <a class="store" href="#laden"><span><small>Laden im</small><b>App Store</b></span></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow"><i></i> Für iPhone · Jetzt im App Store</span>
+        <h1>Der Wecker, den du nicht wegdrücken kannst.</h1>
+        <p class="lede">
+          Blayze hat keine Schlummertaste. Er klingelt weiter, bis du eine Mission
+          gelöst hast: Schütteln, Kopfrechnen, Schritte gehen oder den Barcode
+          deiner Zahnpasta scannen. Danach bist du wach, und zwar wirklich.
+        </p>
+        <div class="hero-cta">
+          <a class="store lg" href="#laden"><span><small>Laden im</small><b>App Store</b></span></a>
+          <span class="unter">7 Tage gratis · danach 39,99 € im Jahr · jederzeit kündbar</span>
+        </div>
+      </div>
+
+      <div class="shots">
+        <img src="screenshots/klein/start.webp" alt="Blayze Startbildschirm mit dem nächsten Wecker und der empfohlenen Bettzeit" width="700" height="1512" loading="eager">
+        <img src="screenshots/klein/missionen.webp" alt="Auswahl der Missionen, mit denen sich der Wecker beenden lässt" width="700" height="1512" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="so">
+    <div class="wrap">
+      <h2>Drei Schritte, einmal eingerichtet.</h2>
+      <p class="intro">
+        Danach passiert alles von selbst. Du entscheidest nur noch, wie hart der
+        Morgen sein darf.
+      </p>
+      <div class="karten">
+        <article class="karte">
+          <span class="num">01</span>
+          <h3>Wecker stellen</h3>
+          <p>Zeit, Tage, Ton. Blayze rechnet dir dazu aus, wann du dafür ins Bett solltest.</p>
+        </article>
+        <article class="karte">
+          <span class="num">02</span>
+          <h3>Mission wählen</h3>
+          <p>Zwölf Missionen in vier Stufen, von Tippen im Sitzen bis Aufstehen und Hingehen. In jeder Stufe gibt es eine Variante, die Knie und Rücken schont.</p>
+        </article>
+        <article class="karte">
+          <span class="num">03</span>
+          <h3>Morgens lösen</h3>
+          <p>Der Wecker hört auf, wenn die Mission gelöst ist. Nicht vorher. Für jeden geschafften Morgen bekommst du eine Sonne.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="preis" style="padding-top:0">
+    <div class="wrap">
+      <div class="schluss" id="laden" style="scroll-margin-top:86px">
+        <div>
+          <h2>Morgen früh klingelt er zum ersten Mal.</h2>
+          <p class="preis">
+            <b>7 Tage gratis</b>, danach <b>39,99 €</b> im Jahr.<br>
+            Lieber monatlich? <b>7,99 €</b>, sofort abgerechnet.<br>
+            Beides jederzeit kündbar, keine Kündigungsfrist.
+          </p>
+        </div>
+        <a class="store lg" href="#laden"><span><small>Laden im</small><b>App Store</b></span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="/impressum">Impressum</a>
+      <a href="/datenschutz">Datenschutz</a>
+      <a href="/agb">AGB</a>
+      <a href="/support">Support</a>
+    </nav>
+    <span class="copy">Feleppa Brands · Hamburg</span>
+  </div>
+</footer>
+
+<script>
+// Alle Store-Knoepfe zeigen auf denselben Eintrag. Eine Stelle zum Aendern.
+var APP_STORE_URL = "https://apps.apple.com/de/app/id6809927492";
+document.querySelectorAll('a.store').forEach(function (a) {
+  a.setAttribute('href', APP_STORE_URL);
+  a.setAttribute('target', '_blank');
+  a.setAttribute('rel', 'noopener');
+});
+</script>
+
+</body>
+</html>
