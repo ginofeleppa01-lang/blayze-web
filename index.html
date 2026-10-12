@@ -4,18 +4,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Blayze. Der Wecker, den du nicht wegdrücken kannst.</title>
-<meta name="description" content="Blayze ist ein iPhone-Wecker ohne Schlummertaste. Er klingelt weiter, bis du deine Mission gelöst hast. Jetzt im App Store, sieben Tage kostenlos.">
+<meta name="description" content="Blayze ist ein iPhone-Wecker ohne Schlummertaste. Er klingelt, bis du deine Mission gelöst hast, und kommt wieder, wenn du ihn wegwischst. Sieben Tage kostenlos.">
+<link rel="canonical" href="https://blayzeapp.de/">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0C0A09">
+<meta name="apple-itunes-app" content="app-id=6809927492">
 <meta property="og:title" content="Blayze. Der Wecker, den du nicht wegdrücken kannst.">
-<meta property="og:description" content="Ein iPhone-Wecker ohne Schlummertaste. Er hört erst auf, wenn die Mission gelöst ist.">
+<meta property="og:description" content="Keine Schlummertaste. Er hört erst auf, wenn die Mission gelöst ist, und kommt wieder, wenn du ihn wegwischst.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://blayzeapp.de/">
+<meta property="og:image" content="https://blayzeapp.de/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MobileApplication","name":"Blayze","operatingSystem":"iOS","applicationCategory":"LifestyleApplication","inLanguage":"de","description":"iPhone-Wecker ohne Schlummertaste. Er klingelt, bis eine Mission gelöst ist.","url":"https://blayzeapp.de/","downloadUrl":"https://apps.apple.com/de/app/id6809927492","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}
+</script>
 <style>
 :root{
   --ground:#0C0A09;
@@ -203,195 +213,269 @@ footer{background:var(--ground);border-top:1px solid var(--border);padding:var(-
   .thumb{transition:none}
   .badge{transition:none}
 }
+
+/* ================= Neu im roten Faden ================= */
+.kicker{font-family:var(--mono);font-size:13px;letter-spacing:.4px;color:var(--ink-mid);line-height:1.7}
+.kicker b{color:var(--ink);font-weight:500}
+.sec-head{display:flex;flex-direction:column;gap:var(--s2);margin-bottom:var(--s5);max-width:62ch}
+
+/* Kennst du das */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{
+  font:inherit;font-size:16px;color:var(--ink);cursor:pointer;text-align:left;line-height:1.35;
+  background:var(--surface);border:1px solid var(--border);border-radius:999px;
+  padding:11px 18px;display:inline-flex;align-items:center;gap:10px;
+  transition:border-color .18s ease,background .18s ease;
+}
+.chip::before{content:"";width:16px;height:16px;border-radius:50%;border:1.5px solid var(--ink-low);flex:none;transition:all .18s ease}
+.chip[aria-pressed="true"]{border-color:var(--signal);background:#1E140D}
+.chip[aria-pressed="true"]::before{background:var(--signal);border-color:var(--signal);box-shadow:inset 0 0 0 3px #1E140D}
+.chip:hover{border-color:var(--ink-low)}
+.antwort{margin-top:var(--s4);min-height:3.4em;color:var(--ink-mid);max-width:56ch;transition:color .3s ease}
+.antwort.an{color:var(--ink)}
+.antwort strong{color:var(--signal);font-weight:800}
+
+/* Mechanismus */
+.mech{display:grid;gap:var(--s2);grid-template-columns:1fr}
+@media (min-width:860px){.mech{grid-template-columns:repeat(3,1fr)}}
+.mech .card{position:relative;padding:var(--s4) var(--s3) var(--s3)}
+.mech .when{font-family:var(--mono);font-size:var(--t-mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--signal);display:flex;align-items:center;gap:10px}
+.mech .when i{display:block;width:22px;height:22px;border-radius:50%;flex:none}
+.mech .abend i{background:radial-gradient(circle at 35% 35%,#3A2A55,#1B1530);box-shadow:inset -4px -3px 0 #0C0A09}
+.mech .morgen i{background:radial-gradient(circle,#FFD9A0,var(--signal) 60%,var(--signal-deep))}
+.mech .danach i{background:conic-gradient(var(--signal) 0 75%,var(--border) 75%)}
+.mech h3{font-size:22px;letter-spacing:-0.02em}
+
+/* Weckerkette */
+.kette{position:relative;padding:var(--s5) 0 var(--s2)}
+.kette .bahn{position:relative;height:2px;background:var(--border);margin:0 8px}
+.kette .glut{position:absolute;left:0;top:0;height:2px;width:0;background:linear-gradient(90deg,var(--signal-lite),var(--signal));box-shadow:0 0 14px rgba(255,138,0,.7)}
+.kette.in .glut{animation:glut 3.6s cubic-bezier(.3,.6,.3,1) .2s forwards}
+@keyframes glut{to{width:100%}}
+.kette .glied{position:absolute;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--ground);border:2px solid var(--signal)}
+.kette .glied.erst{width:18px;height:18px;margin:-9px 0 0 -9px;background:var(--signal)}
+.kette .zahl{position:absolute;top:22px;transform:translateX(-50%);font-family:var(--mono);font-size:12px;color:var(--ink-mid);white-space:nowrap}
+.kette .zahl.oben{top:-34px;color:var(--ink);transform:translateX(-9px)}
+.kette .zahl:last-of-type{transform:translateX(-100%)}
+.kette-unter{display:flex;justify-content:space-between;font-family:var(--mono);font-size:var(--t-mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--ink-low);margin-top:48px}
+.fuss{font-size:14px;color:var(--ink-low);max-width:62ch;line-height:1.6}
+
+/* Was du schon versucht hast */
+.versuche{display:grid;gap:var(--s2);grid-template-columns:1fr}
+@media (min-width:860px){.versuche{grid-template-columns:repeat(3,1fr)}}
+.versuche .card .bricht{font-family:var(--mono);font-size:var(--t-mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--ink-low)}
+.versuche .card h3{font-size:19px}
+.versuche .loesung{grid-column:1/-1;border-color:var(--signal);display:flex;flex-direction:column;gap:var(--s1)}
+@media (min-width:860px){.versuche .loesung{flex-direction:row;align-items:center;gap:var(--s4)}.versuche .loesung h3{flex:none}}
+
+/* Unbequem */
+.unbequem{padding:var(--s7) 0;text-align:left}
+.unbequem h2{font-size:clamp(34px,6.4vw,64px);max-width:16ch}
+.unbequem h2 em{font-style:normal;color:var(--signal)}
+
+/* Stimme */
+.stimme{display:grid;gap:var(--s4);grid-template-columns:1fr;align-items:start}
+@media (min-width:900px){.stimme{grid-template-columns:.9fr 1.1fr;gap:var(--s6)}}
+blockquote{margin:0;font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-0.03em;line-height:1.12}
+blockquote::before{content:"„";color:var(--signal)}
+blockquote::after{content:"“";color:var(--signal)}
+.entwurf{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#1a0f00;background:#FFB454;border-radius:6px;padding:3px 8px}
+
+/* Fragen */
+.fragen{display:flex;flex-direction:column;border-top:1px solid var(--border)}
+.fragen details{border-bottom:1px solid var(--border)}
+.fragen summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:var(--s3);padding:22px 0;font-weight:800;font-size:clamp(18px,2vw,21px);letter-spacing:-0.015em;line-height:1.3}
+.fragen summary::-webkit-details-marker{display:none}
+.fragen summary::after{content:"";flex:none;width:14px;height:14px;background:linear-gradient(var(--signal),var(--signal)) center/14px 2px no-repeat,linear-gradient(var(--signal),var(--signal)) center/2px 14px no-repeat;transition:transform .2s ease}
+.fragen details[open] summary::after{transform:rotate(45deg)}
+.fragen .a{padding:0 0 24px;color:var(--ink-mid);max-width:64ch;display:flex;flex-direction:column;gap:12px}
+
+/* Versprechen */
+.versprechen{border:1px solid var(--signal);border-radius:18px;padding:var(--s4);display:grid;gap:var(--s2);background:linear-gradient(180deg,#1C130C,var(--surface))}
+.versprechen h3{font-size:clamp(22px,3vw,28px);letter-spacing:-0.02em}
+.schritte{display:grid;gap:var(--s2);grid-template-columns:1fr;margin-top:var(--s1)}
+@media (min-width:700px){.schritte{grid-template-columns:repeat(3,1fr)}}
+.schritte div{border-top:1px solid var(--border);padding-top:12px;display:flex;flex-direction:column;gap:4px}
+.schritte b{font-family:var(--mono);font-weight:500;font-size:var(--t-mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--signal)}
+.schritte span{color:var(--ink-mid);font-size:16px}
+@media (prefers-reduced-motion:reduce){.kette .glut{animation:none;width:100%}.chip,.chip::before{transition:none}}
 </style>
 </head>
 <body>
 
 <header class="hd">
   <div class="hd-in">
-    <a class="mark" href="#top">
-      <svg width="24" height="18" viewBox="0 2 32 24" fill="none" aria-hidden="true"><path d="M3 24H29" stroke="#FF8A00" stroke-width="3.4" stroke-linecap="round"/><path d="M7 24A9 9 0 0 1 25 24" fill="#FF8A00"/><path d="M16 4V8M27 9L24.5 11.5M5 9L7.5 11.5" stroke="#FF8A00" stroke-width="3.2" stroke-linecap="round"/></svg>
-      <span>Blayze</span>
-    </a>
-    <a class="badge store" href="#laden">
-      <svg width="17" height="20" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M14.6 12.6c0-2.4 1.9-3.6 2-3.7-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.5Z" fill="currentColor"/><path d="M12.4 5.2c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2-.5 2.7-1.3Z" fill="currentColor"/></svg>
-      <span class="lines"><span class="l1">Laden im</span><span class="l2">App Store</span></span>
-    </a>
+    <a class="mark" href="#top"><svg width="24" height="18" viewBox="0 2 32 24" fill="none" aria-hidden="true"><path d="M3 24H29" stroke="#FF8A00" stroke-width="3.4" stroke-linecap="round"/><path d="M7 24A9 9 0 0 1 25 24" fill="#FF8A00"/><path d="M16 4V8M27 9L24.5 11.5M5 9L7.5 11.5" stroke="#FF8A00" stroke-width="3.2" stroke-linecap="round"/></svg><span>Blayze</span></a>
+    <a class="badge store" data-ct="kopf" href="#laden"><svg width="17" height="20" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M14.6 12.6c0-2.4 1.9-3.6 2-3.7-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.5Z" fill="currentColor"/><path d="M12.4 5.2c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2-.5 2.7-1.3Z" fill="currentColor"/></svg><span class="lines"><span class="l1">Laden im</span><span class="l2">App Store</span></span></a>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- 1 Held -->
+  <!-- 1 Held: erst Wiedererkennung, dann das Produkt -->
   <section class="hero">
-    <div class="horizon" aria-hidden="true">
-      <div class="sky"></div>
-      <div class="glow"></div>
-      <div class="sun"></div>
-      <div class="line"></div>
-      <div class="fade"></div>
-    </div>
+    <div class="horizon" aria-hidden="true"><div class="sky"></div><div class="glow"></div><div class="sun"></div><div class="line"></div><div class="fade"></div></div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">Für iPhone · Jetzt im App Store</p>
+        <p class="kicker">Drei Wecker gestellt. Alle ausgemacht.<br><b>Nicht mal gemerkt.</b></p>
         <h1>Der Wecker, den du nicht wegdrücken kannst.</h1>
-        <p class="lede narrow">Blayze klingelt weiter. Er hört erst auf, wenn du deine Mission gelöst hast. Keine Taste, kein Aufschub.</p>
-        <a class="badge lg store" href="#laden">
-          <svg width="26" height="31" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M14.6 12.6c0-2.4 1.9-3.6 2-3.7-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.5Z" fill="currentColor"/><path d="M12.4 5.2c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2-.5 2.7-1.3Z" fill="currentColor"/></svg>
-          <span class="lines"><span class="l1">Laden im</span><span class="l2">App Store</span></span>
-        </a>
+        <p class="lede narrow">Blayze hat keine Schlummertaste. Er klingelt, bis du deine Mission gelöst hast. Und wischst du ihn weg, kommt er nach einer Minute wieder.</p>
+        <a class="badge lg store" data-ct="hero" href="#laden"><svg width="26" height="31" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M14.6 12.6c0-2.4 1.9-3.6 2-3.7-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.5Z" fill="currentColor"/><path d="M12.4 5.2c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2-.5 2.7-1.3Z" fill="currentColor"/></svg><span class="lines"><span class="l1">Laden im</span><span class="l2">App Store</span></span></a>
         <p class="meta">Sieben Tage kostenlos testen<br>Danach 0,77 € pro Woche im Jahresabo</p>
       </div>
       <div class="shot lg"><img src="screenshots/klein/start.webp" alt="Blayze Startbildschirm mit nächster Weckzeit"></div>
     </div>
   </section>
 
-  <!-- 2 Problem -->
+  <!-- 2 Kennst du das: die Worte aus dem Onboarding -->
   <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow dim">Kennst du das?</p>
+        <h2>Tipp an, was auf dich zutrifft.</h2>
+      </div>
+      <div class="chips" id="chips">
+        <button class="chip" type="button" aria-pressed="false">Ich habe aufgehört zu zählen, wie oft ich drücke</button>
+        <button class="chip" type="button" aria-pressed="false">Manchmal überhöre ich ihn ganz</button>
+        <button class="chip" type="button" aria-pressed="false">Zu spät zur Arbeit oder Uni</button>
+        <button class="chip" type="button" aria-pressed="false">Training ausfallen lassen</button>
+        <button class="chip" type="button" aria-pressed="false">Morgens nur noch gehetzt</button>
+        <button class="chip" type="button" aria-pressed="false">Gerädert, obwohl ich genug geschlafen habe</button>
+        <button class="chip" type="button" aria-pressed="false">Ärger mit jemandem deswegen</button>
+      </div>
+      <p class="antwort" id="antwort" aria-live="polite">Wenn hier nichts passt, brauchst du Blayze nicht. Wenn doch, lies weiter.</p>
+    </div>
+  </section>
+
+  <!-- 3 Es liegt nicht an dir -->
+  <section class="sec" style="padding-top:0">
     <div class="wrap split">
       <div class="stack">
-        <p class="eyebrow dim">01 · Das Problem</p>
+        <p class="eyebrow dim">Es liegt nicht an dir</p>
         <h2>Du drückst nicht, weil du schwach bist. Du drückst, weil die Taste da ist.</h2>
       </div>
       <div class="stack">
-        <p class="lede">Schläfst du nach dem ersten Klingeln wieder ein, startet dein Körper einen neuen Schlafzyklus. Der dauert rund <span class="num">90</span> Minuten. Nach <span class="num">9</span> Minuten reißt der Wecker ihn mitten im Anlauf ab.</p>
-        <p class="lede">Daher kommt das Gerädertsein. Nicht vom Aufstehen, sondern vom Abbrechen. Wer dreimal schlummert, bricht dreimal ab.</p>
-        <div class="card">
-          <p class="eyebrow">Die Konsequenz</p>
-          <p style="color:var(--ink)">Blayze hat keine Schlummertaste. Nicht als Strafe, sondern damit die Entscheidung nicht jeden Morgen neu gefällt werden muss.</p>
-        </div>
+        <p class="lede">Um halb sieben entscheidet nicht der Mensch, der am Abend den Wecker gestellt hat. Es entscheidet dein Halbschlaf, und der nimmt jeden Ausweg, den man ihm anbietet.</p>
+        <p class="lede">Schläfst du nach dem Klingeln wieder ein, beginnt ein neuer Schlafzyklus. Der dauert rund <span class="num">90</span> Minuten, der Wecker reißt ihn nach <span class="num">9</span> ab. Daher kommt das Gerädertsein. Nicht vom Aufstehen, sondern vom Abbrechen.</p>
       </div>
     </div>
   </section>
 
-  <!-- 3 Einrichtung -->
+  <!-- 4 Der Mechanismus -->
   <section class="sec" style="padding-top:0">
     <div class="wrap">
-      <div class="stack rise" style="margin-bottom:var(--s4)">
-        <p class="eyebrow dim">02 · Einrichtung</p>
-        <h2 class="narrow">In einer Minute eingerichtet.</h2>
-        <p class="lede narrow">Drei Fragen, deine Mission, deine Weckzeit. Kein Konto, keine Anmeldung, keine E-Mail.</p>
+      <div class="sec-head rise">
+        <p class="eyebrow">So funktioniert Blayze</p>
+        <h2>Abends entscheiden. Morgens nur noch lösen.</h2>
+        <p class="lede">Die Entscheidung fällst du, solange du wach bist. Am Morgen bleibt deinem Halbschlaf nichts mehr zu entscheiden, nur noch eine Aufgabe.</p>
       </div>
-      <div class="split" style="align-items:center">
-      <div class="grid rise" style="gap:var(--s2)">
-        <div class="card">
-          <p class="eyebrow num">01</p>
-          <h3>Drei Fragen</h3>          <p>Wann willst du raus, wie hart darf es sein, was hält dich morgens auf.</p>
-        </div>
-        <div class="card">
-          <p class="eyebrow num">02</p>
-          <h3>Deine Mission</h3>
-          <p>Du wählst, was dich zuverlässig wach macht. Ändern kannst du das jederzeit.</p>
-        </div>
-        <div class="card">
-          <p class="eyebrow num">03</p>
-          <h3>Deine Weckzeit</h3>
-          <p>Stellen, fertig. Ab hier läuft Blayze, ohne dass du etwas verwaltest.</p>
-        </div>
-      </div>
-      <div class="shotcol rise">
-        <div class="shot"><img src="screenshots/klein/missionen.webp" alt="Auswahl der Mission in der Blayze App" loading="lazy"></div>
-      </div>
+      <div class="mech rise">
+        <div class="card abend"><p class="when"><i></i>Am Abend</p><h3>Du legst fest, wie der Morgen läuft</h3><p>Weckzeit und Mission. Blayze rechnet dir aus, wann du ins Bett solltest, und du kannst die Mission vorher einmal in Ruhe ausprobieren.</p></div>
+        <div class="card morgen"><p class="when"><i></i>Am Morgen</p><h3>Keine Taste, keine Verhandlung</h3><p>Der Wecker hört erst auf, wenn die Mission gelöst ist. Kopfrechnen, Schütteln, Schritte, ein Foto vom Bad. Danach bist du wach.</p></div>
+        <div class="card danach"><p class="when"><i></i>Wenn du ihn wegwischst</p><h3>Er kommt wieder</h3><p>Nach einer Minute, nach zwei, nach drei. Bis zu einer Stunde lang, bis die Mission gelöst ist.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- 4 Missionen -->
+  <!-- 5 Der Einwand Nummer eins -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="eyebrow dim">Und wenn ich ihn einfach wegwische?</p>
+        <h2>Dann klingelt er gleich noch mal.</h2>
+        <p class="lede">Hinter jedem Wecker liegt eine Kette aus Weckrufen. Wegwischen hält ihn auf, aber nicht lange. Sie endet erst, wenn du die Mission gelöst hast.</p>
+      </div>
+      <div class="kette rise" id="kette" aria-label="Weckerkette: Klingeln, dann nach 1, 2, 3, 4, 5, 7, 10, 15, 20, 30, 45 und 60 Minuten erneut">
+        <div class="bahn"><div class="glut"></div><span class="glied erst" style="left:0.000%"></span><span class="glied" style="left:1.667%"></span><span class="glied" style="left:3.333%"></span><span class="glied" style="left:5.000%"></span><span class="glied" style="left:6.667%"></span><span class="glied" style="left:8.333%"></span><span class="glied" style="left:11.667%"></span><span class="glied" style="left:16.667%"></span><span class="glied" style="left:25.000%"></span><span class="glied" style="left:33.333%"></span><span class="glied" style="left:50.000%"></span><span class="glied" style="left:75.000%"></span><span class="glied" style="left:100.000%"></span><span class="zahl oben" style="left:0.000%">Klingeln</span><span class="zahl" style="left:8.333%">+5</span><span class="zahl" style="left:16.667%">+10</span><span class="zahl" style="left:33.333%">+20</span><span class="zahl" style="left:50.000%">+30</span><span class="zahl" style="left:75.000%">+45</span><span class="zahl" style="left:100.000%">+60</span></div>
+        <div class="kette-unter"><span>Minute 0</span><span>Eine Stunde</span></div>
+      </div>
+      <div class="split" style="margin-top:var(--s6)">
+        <div class="stack">
+          <h3 style="font-size:var(--t-title);letter-spacing:-0.03em;line-height:1.1">Und wenn das Handy auf lautlos ist?</h3>
+          <p class="lede">Ab iOS <span class="num">26</span> weckt Blayze über Apples eigenen Systemwecker. Der klingelt, egal wie dein iPhone eingestellt ist.</p>
+          <ul class="plain">
+            <li>Klingelt im Stummmodus</li>
+            <li>Klingelt bei aktiviertem Fokus</li>
+            <li>Klingelt bei geschlossener App</li>
+          </ul>
+          <p class="fuss">Auf iPhones vor iOS 26 weckt Blayze über Mitteilungen. Die klingeln im Stummmodus nicht, darauf weist dich die App hin.</p>
+        </div>
+        <div class="shotcol rise"><div class="shot"><img src="screenshots/klein/sperrbildschirm.webp" alt="Blayze auf dem Sperrbildschirm" loading="lazy"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Der Status quo -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rise">
+        <p class="eyebrow dim">Was du schon versucht hast</p>
+        <h2>Jeder Trick hat eine Lücke. Dein Halbschlaf findet sie.</h2>
+      </div>
+      <div class="versuche rise">
+        <div class="card"><p class="bricht">Versuch</p><h3>Drei Wecker hintereinander</h3><p>Nach einer Woche drückst du alle drei aus, ohne richtig wach zu werden. Mehr Wecker trainieren nur das Ausmachen.</p></div>
+        <div class="card"><p class="bricht">Versuch</p><h3>Handy ans andere Ende des Zimmers</h3><p>Du stehst auf, machst aus und legst dich wieder hin. Zwei Schritte reichen nicht, um wach zu werden.</p></div>
+        <div class="card"><p class="bricht">Versuch</p><h3>Einfach mehr Disziplin</h3><p>Hält, solange der Abend gut war. Am ersten müden Morgen gewinnt wieder die Taste.</p></div>
+        <div class="card loesung"><h3>Blayze nimmt die Lücke weg.</h3><p style="color:var(--ink)">Keine Taste, die man im Halbschlaf trifft. Ausmachen geht nur, indem du wach wirst.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 Missionen, und die Angst vor zu hart -->
   <section class="sec" style="padding-top:0">
     <div class="wrap split rev">
-      <div class="shotcol rise">
-        <div class="shot"><img src="screenshots/klein/rechner.webp" alt="Mission Kopfrechnen mit Ziffernblock" loading="lazy"></div>
-      </div>
+      <div class="shotcol rise"><div class="shot"><img src="screenshots/klein/rechner.webp" alt="Mission Kopfrechnen mit Ziffernblock" loading="lazy"></div></div>
       <div class="stack">
-        <p class="eyebrow dim">03 · Zwölf Missionen</p>
-        <h2>Vier Stufen. Du drehst hoch, wenn du dich gewöhnt hast.</h2>
+        <p class="eyebrow dim">Zwölf Missionen in vier Stufen</p>
+        <h2>So hart, wie du es brauchst. Nicht härter.</h2>
+        <p class="lede">Du fängst sanft an und drehst hoch, wenn du dich gewöhnt hast. Für jeden Körper gibt es eine Variante, die passt. Und am Abend kannst du jede Mission einmal ohne Ton ausprobieren, damit dich morgens nichts überrascht.</p>
         <div class="grid g2" style="width:100%">
-          <div class="card">
-            <p class="eyebrow num">Stufe 01 · Sanft</p>
-            <ul class="plain"><li>Zielpunkte treffen</li><li>Kopfrechnen</li><li>Einen Satz abtippen</li></ul>
-          </div>
-          <div class="card">
-            <p class="eyebrow num">Stufe 02 · Kopf</p>
-            <ul class="plain"><li>Zahlenfolge merken</li><li>Farbfolge nachtippen</li><li>Wort rückwärts eingeben</li></ul>
-          </div>
-          <div class="card">
-            <p class="eyebrow num">Stufe 03 · Bewegung</p>
-            <ul class="plain"><li>Schütteln</li><li>Dreimal drehen</li><li>Schritte gehen</li><li>Kniebeugen</li></ul>
-          </div>
-          <div class="card">
-            <p class="eyebrow num">Stufe 04 · Raus aus dem Bett</p>
-            <ul class="plain"><li>Hinterlegten Gegenstand fotografieren</li><li>Barcode scannen</li></ul>
-          </div>
+          <div class="card"><p class="eyebrow num">Stufe 01 · Sanft</p><ul class="plain"><li>Zielpunkte treffen</li><li>Kopfrechnen</li><li>Einen Satz abtippen</li></ul></div>
+          <div class="card"><p class="eyebrow num">Stufe 02 · Kopf</p><ul class="plain"><li>Zahlenfolge merken</li><li>Farbfolge nachtippen</li><li>Wort rückwärts eingeben</li></ul></div>
+          <div class="card"><p class="eyebrow num">Stufe 03 · Bewegung</p><ul class="plain"><li>Schütteln</li><li>Dreimal drehen</li><li>Schritte gehen</li><li>Kniebeugen</li></ul></div>
+          <div class="card"><p class="eyebrow num">Stufe 04 · Raus aus dem Bett</p><ul class="plain"><li>Hinterlegten Gegenstand fotografieren</li><li>Barcode scannen</li></ul></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 5 Lebenszeit -->
+  <!-- 8 Unbequem als Versprechen -->
+  <section class="unbequem">
+    <div class="wrap stack">
+      <h2>Blayze ist unbequem. <em>Das ist der ganze Punkt.</em></h2>
+      <p class="lede narrow">Ein Wecker, der dich in Ruhe lässt, wenn du ihn darum bittest, hast du schon. Blayze lässt nicht mit sich reden. Dafür musst du morgens auch nicht mit dir reden.</p>
+    </div>
+  </section>
+
+  <!-- 9 Die Rechnung -->
   <section class="sec" style="padding-top:0">
     <div class="wrap">
-      <div class="stack rise" style="margin-bottom:var(--s4)">
-        <p class="eyebrow dim">04 · Die Rechnung</p>
-        <h2 class="narrow">Es gibt dir Lebenszeit zurück.</h2>
-        <p class="lede narrow">Zweimal schlummern sind gut achtzehn Minuten. Fünf Tage die Woche, aufs Jahr gerechnet, sind das mehr als drei volle Tage. Blayze rechnet dir deine persönliche Zahl aus.</p>
+      <div class="sec-head rise">
+        <p class="eyebrow dim">Die Rechnung</p>
+        <h2>Was dich das Schlummern kostet.</h2>
+        <p class="lede">Zweimal schlummern sind gut achtzehn Minuten. Fünf Tage die Woche, aufs Jahr gerechnet, sind das mehr als drei volle Tage. Blayze rechnet dir deine eigene Zahl aus.</p>
       </div>
       <div class="grid g3 rise">
-        <div class="card">
-          <p class="price"><span class="big">18</span><span class="lede">Minuten pro Morgen</span></p>
-          <p>Zweimal geschlummert, zweimal neun Minuten.</p>
-        </div>
-        <div class="card">
-          <p class="price"><span class="big">78</span><span class="lede">Stunden im Jahr</span></p>
-          <p>Bei fünf Tagen die Woche über zweiundfünfzig Wochen.</p>
-        </div>
-        <div class="card lead">
-          <p class="price"><span class="big">3+</span><span class="lede">volle Tage</span></p>
-          <p style="color:var(--ink)">Zeit, die nicht als Schlaf zählt und trotzdem weg ist.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6 Sperrbildschirm -->
-  <section class="sec" style="padding-top:0">
-    <div class="wrap split">
-      <div class="stack">
-        <p class="eyebrow dim">05 · Der Sperrbildschirm</p>
-        <h2>Dein iPhone weckt dich. Blayze holt dich raus.</h2>
-        <p class="lede">Ab iOS <span class="num">26</span> nutzt Blayze Apples eigene Weckfunktion. Das System sorgt dafür, dass du gehört wirst. Blayze sorgt dafür, dass du danach nicht wieder liegst.</p>
-        <ul class="plain">
-          <li>Klingelt im Stummmodus</li>
-          <li>Klingelt bei aktiviertem Fokus</li>
-          <li>Klingelt bei geschlossener App</li>
-        </ul>
-      </div>
-      <div class="shotcol rise">
-        <div class="shot"><img src="screenshots/klein/sperrbildschirm.webp" alt="Blayze auf dem Sperrbildschirm" loading="lazy"></div>
+        <div class="card"><p class="price"><span class="big">18</span><span class="lede">Minuten pro Morgen</span></p><p>Zweimal geschlummert, zweimal neun Minuten.</p></div>
+        <div class="card"><p class="price"><span class="big">78</span><span class="lede">Stunden im Jahr</span></p><p>Bei fünf Tagen die Woche über zweiundfünfzig Wochen.</p></div>
+        <div class="card lead"><p class="price"><span class="big">3+</span><span class="lede">volle Tage</span></p><p style="color:var(--ink)">Zeit, die nicht als Schlaf zählt und trotzdem weg ist.</p></div>
       </div>
     </div>
   </section>
 
   <div class="dawn" aria-hidden="true"></div>
 
-  <!-- 7 Der Morgen danach -->
+  <!-- 10 Der Morgen danach: der Wunsch -->
   <section class="sec morning">
     <div class="wrap split rev">
-      <div class="shotcol rise">
-        <div class="shot"><img src="screenshots/klein/morgen.webp" alt="Blayze Morgenbildschirm nach gelöster Mission" loading="lazy"></div>
-      </div>
+      <div class="shotcol rise"><div class="shot"><img src="screenshots/klein/morgen.webp" alt="Blayze Morgenbildschirm nach gelöster Mission" loading="lazy"></div></div>
       <div class="stack">
-        <p class="eyebrow">06 · Der Morgen danach</p>
-        <h2>Mission gelöst. Die Sonne steht.</h2>
-        <p>In der App geht der Himmel jetzt ins Helle. Du siehst, wie lange es vom ersten Klingeln bis zum Aufstehen gedauert hat, und du bekommst eine Sonne dafür.</p>
+        <p class="eyebrow">Der Morgen danach</p>
+        <h2>Du bist der Mensch, auf den du dich morgens verlassen kannst.</h2>
+        <p>Die erste Stunde gehört wieder dir. Kein Hetzen, kein schlechtes Gewissen, bevor der Tag angefangen hat. In der App geht der Himmel ins Helle, und du siehst, wie lange es vom Klingeln bis zum Aufstehen gedauert hat.</p>
         <div class="grid g2" style="width:100%">
-          <div class="card">
-            <h3>Gesammelte Sonnen</h3>
-            <p>Eine pro gelöster Mission. Sie bleiben, auch wenn ein Morgen schiefgeht.</p>
-          </div>
-          <div class="card">
-            <h3>Serie</h3>
-            <p>Die Tage hintereinander, an denen du direkt aufgestanden bist. Sie startet neu, ohne Kommentar.</p>
-          </div>
+          <div class="card"><h3>Gesammelte Sonnen</h3><p>Eine pro gelöster Mission. Sie bleiben, auch wenn ein Morgen schiefgeht.</p></div>
+          <div class="card"><h3>Serie</h3><p>Die Tage hintereinander, an denen du direkt aufgestanden bist. Sie startet neu, ohne Kommentar.</p></div>
         </div>
       </div>
     </div>
@@ -399,70 +483,77 @@ footer{background:var(--ground);border-top:1px solid var(--border);padding:var(-
 
   <div class="dusk" aria-hidden="true"></div>
 
-  <!-- 8 Schlafrechner -->
-  <section class="sec">
-    <div class="wrap split">
-      <div class="stack">
-        <p class="eyebrow dim">07 · Schlafrechner</p>
-        <h2>Der Morgen beginnt am Abend.</h2>
-        <p class="lede">Blayze rechnet von deiner Weckzeit zurück und erinnert dich, wenn es Zeit ins Bett ist. Ein Schlafzyklus dauert rund <span class="num">90</span> Minuten, das Einschlafen etwa <span class="num">14</span>.</p>
-        <div class="card" style="width:100%;max-width:420px">
-          <label class="eyebrow dim" for="wake" style="display:block">Ich will aufstehen um</label>
-          <input id="wake" type="time" value="06:30" style="font-family:var(--mono);font-size:var(--t-title);font-weight:500;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface-hi);color:var(--ink);width:100%;min-height:56px;accent-color:var(--signal)">
-          <div id="beds" style="display:flex;flex-direction:column;gap:10px"></div>
-        </div>
+  <!-- 12 Fragen -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow dim">Fragen, die du dir gerade stellst</p>
+        <h2>Ehrlich beantwortet.</h2>
       </div>
-      <div class="shotcol rise">
-        <div class="shot"><img src="screenshots/klein/schlafrechner.webp" alt="Schlafrechner mit Bettzeit in der Blayze App" loading="lazy"></div>
+      <div class="fragen">
+        <details><summary>Was, wenn ich mit Blayze verschlafe?</summary><div class="a"><p>Ab iOS 26 weckt dich Apples eigener Systemwecker, auch auf lautlos, im Fokus und bei geschlossener App. Die App zeigt dir außerdem, was du noch einstellen solltest, damit er sicher klingelt, zum Beispiel das Handy über Nacht zu laden.</p><p>Für Tage, an denen es wirklich zählt, gibt es kritische Tage: doppelte Mission und eine Vorwarnung am Abend.</p></div></details>
+        <details><summary>Kann ich ihn nicht trotzdem irgendwie ausmachen?</summary><div class="a"><p>Wegwischen bringt nichts, er kommt nach einer Minute wieder. Wer es unbedingt will, kann natürlich das iPhone ausschalten oder die App löschen. Um halb sieben im Halbschlaf ist Aufstehen aber der kürzere Weg. Genau dafür ist Blayze gebaut.</p></div></details>
+        <details><summary>Was, wenn mir die Mission zu schwer ist?</summary><div class="a"><p>Du wählst die Stufe selbst und kannst sie jederzeit ändern. Am Abend probierst du die Mission einmal ohne Ton aus. Für jeden Körper gibt es eine Variante, die passt, niemand muss morgens Kniebeugen machen.</p></div></details>
+        <details><summary>Wozu bezahlen? Mein iPhone hat doch einen Wecker.</summary><div class="a"><p>Der hat eine Schlummertaste, und an der scheitert der Morgen. Blayze kostet im Jahresabo 0,77 € pro Woche. Rechne dagegen, was dich achtzehn Minuten jeden Morgen kosten.</p></div></details>
+        <details><summary>Brauche ich ein Konto?</summary><div class="a"><p>Nein. Kein Konto, keine Anmeldung, keine E-Mail. Deine Wecker liegen auf deinem iPhone.</p></div></details>
+        <details><summary>Wie kündige ich?</summary><div class="a"><p>In den Einstellungen deines iPhones unter Abos, mit zwei Tipps. Kündigst du in den ersten sieben Tagen, wird nichts abgebucht.</p></div></details>
+        <details><summary>Gibt es Blayze für Android?</summary><div class="a"><p>Im Moment nur für iPhone.</p></div></details>
       </div>
     </div>
   </section>
 
-  <!-- 9 Preis -->
+  <!-- 13 Preis mit Risikoumkehr -->
   <section class="sec" style="padding-top:0">
     <div class="wrap">
-      <div class="stack rise" style="margin-bottom:var(--s4)">
-        <p class="eyebrow dim">08 · Preis</p>
-        <h2 class="narrow">Offen gerechnet, jederzeit kündbar.</h2>
+      <div class="sec-head rise">
+        <p class="eyebrow dim">Preis</p>
+        <h2>Sieben Morgen, um es zu beweisen.</h2>
       </div>
-      <div class="grid g2 rise">
+      <div class="versprechen rise">
+        <h3>Steh sieben Tage lang beim ersten Klingeln auf. Wenn nicht, kündigst du und zahlst nichts.</h3>
+        <div class="schritte">
+          <div><b>Heute</b><span>Voller Zugang. Es wird nichts abgebucht.</span></div>
+          <div><b>Tag 1 bis 7</b><span>Sieben Morgen mit Blayze, auch ein Montag ist dabei.</span></div>
+          <div><b>Vor Tag 7</b><span>Kündigen kostet nichts. Sonst beginnt das Jahr.</span></div>
+        </div>
+      </div>
+      <div class="grid g2 rise" style="margin-top:var(--s3)">
         <div class="card lead">
           <p class="eyebrow">Jahr · mit Testphase</p>
           <p class="price"><span class="big" style="font-size:var(--t-display)">39,99 €</span><span class="lede">im Jahr</span></p>
           <p style="color:var(--ink)">Die ersten <span class="num">7</span> Tage gratis. Danach <span class="num">0,77 €</span> pro Woche.</p>
-          <a class="badge store" href="#laden" style="align-self:flex-start;margin-top:var(--s1)">
-            <svg width="17" height="20" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M14.6 12.6c0-2.4 1.9-3.6 2-3.7-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.5Z" fill="currentColor"/><path d="M12.4 5.2c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2-.5 2.7-1.3Z" fill="currentColor"/></svg>
-            <span class="lines"><span class="l1">Laden im</span><span class="l2">App Store</span></span>
-          </a>
+          <a class="badge store" data-ct="preis" href="#laden" style="align-self:flex-start;margin-top:var(--s1)"><svg width="17" height="20" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M14.6 12.6c0-2.4 1.9-3.6 2-3.7-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.5Z" fill="currentColor"/><path d="M12.4 5.2c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2-.5 2.7-1.3Z" fill="currentColor"/></svg><span class="lines"><span class="l1">Laden im</span><span class="l2">App Store</span></span></a>
         </div>
         <div class="card">
           <p class="eyebrow dim">Monat · ohne Testphase</p>
           <p class="price"><span class="big" style="font-size:var(--t-display)">7,99 €</span><span class="lede">im Monat</span></p>
-          <p>Sofort abgerechnet, ohne Testphase.</p>
+          <p>Sofort abgerechnet, jederzeit kündbar.</p>
         </div>
       </div>
-      <p class="lede rise" style="margin-top:var(--s3);font-family:var(--mono);font-size:var(--t-mono);letter-spacing:1.6px;text-transform:uppercase;border-left:2px solid var(--signal);padding-left:var(--s2);line-height:2">Die kostenlose Woche gilt nur im Jahresabo</p>
     </div>
   </section>
 
-  <!-- 10 Laden -->
+  <!-- 14 Der Morgen beginnt am Abend: Schlafrechner und Abschluss -->
   <section class="sec" id="laden" style="padding-top:0;scroll-margin-top:76px">
     <div class="wrap">
       <hr class="rule">
       <div class="split" style="padding-top:var(--s6)">
         <div class="stack">
-          <p class="eyebrow">09 · Laden</p>
-          <h2>Morgen früh klingelt er zum ersten Mal.</h2>
-          <p class="lede">Blayze ist neu und wir sagen das offen. Es gibt noch keine Bewertungen und keine Nutzerzahlen, es gibt die App.</p>
+          <p class="eyebrow">Der Morgen beginnt am Abend</p>
+          <h2>Wann willst du morgen aufstehen?</h2>
+          <p class="lede">Blayze rechnet von deiner Weckzeit zurück. Ein Schlafzyklus dauert rund <span class="num">90</span> Minuten, das Einschlafen etwa <span class="num">14</span>.</p>
+          <div class="card" style="width:100%;max-width:420px">
+            <label class="eyebrow dim" for="wake" style="display:block">Ich will aufstehen um</label>
+            <input id="wake" type="time" value="06:30" style="font-family:var(--mono);font-size:var(--t-title);font-weight:500;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface-hi);color:var(--ink);width:100%;min-height:56px;accent-color:var(--signal)">
+            <div id="beds" style="display:flex;flex-direction:column;gap:10px"></div>
+          </div>
         </div>
         <div class="card lead">
-          <p class="eyebrow">Verfügbar</p>
-          <p style="font-weight:800;font-size:var(--t-title);letter-spacing:-0.03em;line-height:1.1;color:var(--ink)">Im App Store</p>
-          <p>Laden, Weckzeit stellen, Mission wählen. Die ersten sieben Tage kosten nichts.</p>
-          <a class="badge lg store" href="#laden" style="align-self:flex-start;margin-top:var(--s1)">
-            <svg width="26" height="31" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M14.6 12.6c0-2.4 1.9-3.6 2-3.7-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.5Z" fill="currentColor"/><path d="M12.4 5.2c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2-.5 2.7-1.3Z" fill="currentColor"/></svg>
-            <span class="lines"><span class="l1">Laden im</span><span class="l2">App Store</span></span>
-          </a>
+          <p class="eyebrow">Heute Abend einrichten</p>
+          <p style="font-weight:800;font-size:var(--t-title);letter-spacing:-0.03em;line-height:1.1;color:var(--ink)">Morgen früh klingelt er zum ersten Mal.</p>
+          <p>Laden, Weckzeit stellen, Mission wählen. Eine Minute, kein Konto. Die ersten sieben Tage kosten nichts.</p>
+          <p>Blayze ist neu, und wir sagen das offen: Es gibt noch keine Bewertungen und keine Nutzerzahlen. Es gibt die App und sieben Tage, in denen du sie prüfen kannst.</p>
+          <a class="badge lg store" data-ct="schluss" href="#laden" style="align-self:flex-start;margin-top:var(--s1)"><svg width="26" height="31" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M14.6 12.6c0-2.4 1.9-3.6 2-3.7-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.5Z" fill="currentColor"/><path d="M12.4 5.2c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2-.5 2.7-1.3Z" fill="currentColor"/></svg><span class="lines"><span class="l1">Laden im</span><span class="l2">App Store</span></span></a>
           <p style="font-family:var(--mono);font-size:var(--t-mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--ink-low);line-height:1.9">Sieben Tage gratis · Jederzeit kündbar</p>
         </div>
       </div>
@@ -473,97 +564,101 @@ footer{background:var(--ground);border-top:1px solid var(--border);padding:var(-
 
 <footer>
   <div class="wrap" style="display:flex;flex-direction:column;gap:var(--s3)">
-    <div class="ft-sun">
-      <svg width="32" height="24" viewBox="0 2 32 24" fill="none" aria-hidden="true"><path d="M3 24H29" stroke="#FF8A00" stroke-width="3.4" stroke-linecap="round"/><path d="M7 24A9 9 0 0 1 25 24" fill="#FF8A00"/><path d="M16 4V8M27 9L24.5 11.5M5 9L7.5 11.5" stroke="#FF8A00" stroke-width="3.2" stroke-linecap="round"/></svg>
-      <span class="ft-line"></span>
-    </div>
-    <nav class="ft-nav">
-      <a href='/support'>Support</a>
-      <a href='/impressum'>Impressum</a>
-      <a href='/datenschutz'>Datenschutz</a>
-      <a href='/agb'>AGB</a>
-    </nav>
+    <div class="ft-sun"><svg width="32" height="24" viewBox="0 2 32 24" fill="none" aria-hidden="true"><path d="M3 24H29" stroke="#FF8A00" stroke-width="3.4" stroke-linecap="round"/><path d="M7 24A9 9 0 0 1 25 24" fill="#FF8A00"/><path d="M16 4V8M27 9L24.5 11.5M5 9L7.5 11.5" stroke="#FF8A00" stroke-width="3.2" stroke-linecap="round"/></svg><span class="ft-line"></span></div>
+    <nav class="ft-nav"><a href="/support">Support</a><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a><a href="/agb">AGB</a></nav>
     <div class="ft-meta"><span>Blayze</span><span>Wecker ohne Schlummertaste · Für iPhone</span></div>
   </div>
 </footer>
 
-<div class="thumb" id="thumb">
-  <a class="badge store" href="#laden">
-    <svg width="17" height="20" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M14.6 12.6c0-2.4 1.9-3.6 2-3.7-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.5Z" fill="currentColor"/><path d="M12.4 5.2c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2-.5 2.7-1.3Z" fill="currentColor"/></svg>
-    <span class="lines"><span class="l1">Laden im</span><span class="l2">App Store</span></span>
-  </a>
-</div>
+<div class="thumb" id="thumb"><a class="badge store" data-ct="leiste" href="#laden"><svg width="17" height="20" viewBox="0 0 20 24" fill="none" aria-hidden="true"><path d="M14.6 12.6c0-2.4 1.9-3.6 2-3.7-1.1-1.6-2.8-1.8-3.4-1.9-1.5-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.5Z" fill="currentColor"/><path d="M12.4 5.2c.6-.8 1-1.8.9-2.9-.9 0-2 .6-2.7 1.4-.6.7-1 1.8-.9 2.8 1 .1 2-.5 2.7-1.3Z" fill="currentColor"/></svg><span class="lines"><span class="l1">Laden im</span><span class="l2">App Store</span></span></a></div>
 
 <script>
-// App-Store-Link hier eintragen, sobald er vorliegt.
-var APP_STORE_URL = "https://apps.apple.com/de/app/id6809927492";
+/* Jeder Store-Knopf traegt einen eigenen Kampagnencode. In App Store Connect
+   unter App-Analyse > Quellen > Kampagnen steht dann, welcher Knopf und welcher
+   Kanal Downloads bringt. Kanal kommt aus ?k= in der Adresse, zum Beispiel
+   blayzeapp.de/?k=tiktok im TikTok-Profil. Ohne Angabe gilt "web". */
+var APP_ID = "6809927492";
+var PROVIDER = "128978361";
+/* Cloudflare Web Analytics: Token eintragen, dann zaehlt die Seite ohne Cookies.
+   Vorher in der Datenschutzerklaerung ergaenzen. Leer = keine Zaehlung. */
+var CF_BEACON = "";
 
 (function () {
-  if (APP_STORE_URL) {
-    document.querySelectorAll('a.store').forEach(function (a) {
-      a.setAttribute('href', APP_STORE_URL);
-      a.setAttribute('rel', 'noopener');
-    });
+  var kanal = "web";
+  try {
+    var k = new URLSearchParams(location.search).get("k");
+    if (k && /^[a-z0-9]{1,16}$/i.test(k)) { kanal = k.toLowerCase(); sessionStorage.setItem("blayze_k", kanal); }
+    else if (sessionStorage.getItem("blayze_k")) kanal = sessionStorage.getItem("blayze_k");
+  } catch (e) {}
+  document.querySelectorAll("a.store").forEach(function (a) {
+    var ct = (kanal + "_" + (a.getAttribute("data-ct") || "web")).slice(0, 40);
+    a.href = "https://apps.apple.com/app/apple-store/id" + APP_ID + "?pt=" + PROVIDER + "&ct=" + encodeURIComponent(ct) + "&mt=8";
+    a.rel = "noopener";
+  });
+  if (CF_BEACON) {
+    var s = document.createElement("script");
+    s.defer = true; s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+    s.setAttribute("data-cf-beacon", JSON.stringify({ token: CF_BEACON }));
+    document.head.appendChild(s);
   }
 
-
+  // Kennst du das
+  var chips = document.querySelectorAll("#chips .chip");
+  var antwort = document.getElementById("antwort");
+  var ruhe = antwort.textContent;
+  chips.forEach(function (c) {
+    c.addEventListener("click", function () {
+      c.setAttribute("aria-pressed", c.getAttribute("aria-pressed") === "true" ? "false" : "true");
+      var n = document.querySelectorAll('#chips .chip[aria-pressed="true"]').length;
+      antwort.classList.toggle("an", n > 0);
+      antwort.innerHTML = n === 0 ? ruhe
+        : n === 1 ? "Das ist kein Charakterfehler. <strong>Das ist die Taste.</strong> Lies weiter."
+        : n + " von " + chips.length + ". Das ist kein Charakterfehler. <strong>Das ist die Taste.</strong> Lies weiter.";
+    });
+  });
 
   // Schlafrechner
-  var wake = document.getElementById('wake');
-  var beds = document.getElementById('beds');
-  var specs = [[6, '6 Zyklen · rund 9 Stunden'], [5, '5 Zyklen · rund 7,5 Stunden'], [4, '4 Zyklen · rund 6 Stunden']];
-  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  var wake = document.getElementById("wake"), beds = document.getElementById("beds");
+  var specs = [[6, "6 Zyklen · rund 9 Stunden"], [5, "5 Zyklen · rund 7,5 Stunden"], [4, "4 Zyklen · rund 6 Stunden"]];
+  function pad(n) { return n < 10 ? "0" + n : "" + n; }
   function draw() {
-    var p = (wake.value || '06:30').split(':');
-    var h = parseInt(p[0], 10), m = parseInt(p[1], 10);
+    var p = (wake.value || "06:30").split(":"), h = parseInt(p[0], 10), m = parseInt(p[1], 10);
     if (isNaN(h) || isNaN(m)) return;
-    var w = h * 60 + m;
-    beds.innerHTML = '';
+    var w = h * 60 + m; beds.innerHTML = "";
     specs.forEach(function (s) {
       var t = ((w - 14 - s[0] * 90) % 1440 + 1440) % 1440;
-      var row = document.createElement('div');
-      row.style.cssText = 'display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-top:1px solid var(--border);padding-top:10px';
-      var a = document.createElement('span');
-      a.className = 'num';
-      a.style.cssText = 'font-size:var(--t-title);color:var(--ink)';
-      a.textContent = pad(Math.floor(t / 60)) + ':' + pad(t % 60);
-      var b = document.createElement('span');
-      b.className = 'lede';
-      b.style.cssText = 'font-family:var(--mono);font-size:var(--t-mono);letter-spacing:1.6px;text-transform:uppercase;text-align:right';
-      b.textContent = s[1];
-      row.appendChild(a); row.appendChild(b); beds.appendChild(row);
+      var row = document.createElement("div");
+      row.style.cssText = "display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-top:1px solid var(--border);padding-top:10px";
+      var a = document.createElement("span"); a.className = "num"; a.style.cssText = "font-size:var(--t-title);color:var(--ink)";
+      a.textContent = pad(Math.floor(t / 60)) + ":" + pad(t % 60);
+      var b = document.createElement("span"); b.className = "lede";
+      b.style.cssText = "font-family:var(--mono);font-size:var(--t-mono);letter-spacing:1.6px;text-transform:uppercase;text-align:right";
+      b.textContent = s[1]; row.appendChild(a); row.appendChild(b); beds.appendChild(row);
     });
   }
-  wake.addEventListener('input', draw);
-  wake.addEventListener('change', draw);
-  draw();
+  wake.addEventListener("input", draw); wake.addEventListener("change", draw); draw();
 
-  // Abschnitte erscheinen lassen
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var rise = document.querySelectorAll('.rise');
-  if (reduce || !('IntersectionObserver' in window)) {
-    rise.forEach(function (el) { el.classList.add('in'); });
+  // Erscheinen, und die Kette glueht los, sobald sie zu sehen ist
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var rise = document.querySelectorAll(".rise");
+  if (reduce || !("IntersectionObserver" in window)) {
+    rise.forEach(function (el) { el.classList.add("in"); });
   } else {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { rootMargin: '0px 0px -12% 0px' });
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -12% 0px" });
     rise.forEach(function (el) { io.observe(el); });
   }
 
   // Daumenleiste
-  var thumb = document.getElementById('thumb');
-  var hero = document.querySelector('.hero');
-  document.body.classList.add('has-thumb');
+  var thumb = document.getElementById("thumb"), hero = document.querySelector(".hero");
+  document.body.classList.add("has-thumb");
   function toggle() {
     var past = hero.getBoundingClientRect().bottom < 0;
     var atEnd = (window.innerHeight + window.scrollY) > (document.body.scrollHeight - 240);
-    thumb.classList.toggle('on', past && !atEnd);
+    thumb.classList.toggle("on", past && !atEnd);
   }
-  window.addEventListener('scroll', toggle, { passive: true });
-  window.addEventListener('resize', toggle);
-  toggle();
+  window.addEventListener("scroll", toggle, { passive: true }); window.addEventListener("resize", toggle); toggle();
 })();
 </script>
 </body>
